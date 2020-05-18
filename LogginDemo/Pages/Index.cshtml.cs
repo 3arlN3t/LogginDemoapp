@@ -10,35 +10,39 @@ namespace LogginDemo.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        //public IndexModel(ILogger<IndexModel> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+        public IndexModel(ILoggerFactory factory)
         {
-            _logger = logger;
+            _logger = factory.CreateLogger("DemoCategory");
         }
-
         public void OnGet()
         {
             //Logging Levels
-            //_logger.LogTrace("This is trace log");
-            //_logger.LogDebug("This is debug log");
-            //_logger.LogInformation("This is an information log");
-            //_logger.LogWarning("This is a warning log");
-            //_logger.LogError("This is a error log");
-            //_logger.LogCritical("This is a critical log");
+            _logger.LogTrace("This is trace log");
+            _logger.LogDebug("This is debug log");
+            _logger.LogInformation("This is an information log");
+            _logger.LogWarning("This is a warning log");
+            _logger.LogError("This is a error log");
+            _logger.LogCritical("This is a critical log");
 
             //Advance loggin messages
-            _logger.LogError("The server went down at {Time}", DateTime.UtcNow);
+            //_logger.LogError("The server went down at {Time}", DateTime.UtcNow);
 
-            try
-            {
-                throw new Exception("You forgot to catch me");
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            //    throw new Exception("You forgot to catch me");
+            //}
+            //catch (Exception ex)
+            //{
 
-                _logger.LogCritical(ex, "There was a bad exeption at {Time}", DateTime.Now);
-            }
+            //    _logger.LogCritical(ex, "There was a bad exeption at {Time}", DateTime.Now);
+            //}
         }
     }
 
